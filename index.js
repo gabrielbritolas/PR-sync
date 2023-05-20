@@ -3,6 +3,7 @@ const github = require('@actions/github');
 const request = require("./application/request.js");
 const logger = require("./utils/logger.js");
 const colors = require('colors');
+const system = require('./application/system.js');
 
 // import { zip, COMPRESSION_LEVEL } from 'zip-a-folder';
 // import { fs } from 'fs';
@@ -36,10 +37,14 @@ async function Execute() {
                 logger.LogBotStatus(status);
 
             logger.Info(`GITHUB_WORKSPACE: ${process.env.GITHUB_WORKSPACE}`);
+            logger.Info(`GITHUB_WORKSPACE: ${process.env.GITHUB_ENV}`);
         } else
             core.setFailed("Bot not found!");
 
         core.endGroup();
+
+        await system.CompactRepo();
+
 
         core.info(colors.bold.green(`## Process Finished! ##`));
     } catch (error) {
