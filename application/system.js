@@ -7,11 +7,12 @@ module.exports = {
 
     CloneRepo: async (user, token) => {
         const url = `https://${user}:${token}@${github.context.payload.repository.clone_url.replace(`https://`, "")}`;
-        logger.Info(`URL aaaa: ${url}`);
 
-        console.log(url);
+        await clone(url, './repo');
 
-        //await clone(url, )
+        fs.readdirSync('./repo').forEach(file => {
+            console.log(file);
+        });
     },
 
     CompactRepo: async () => {
