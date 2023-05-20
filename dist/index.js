@@ -17106,6 +17106,7 @@ const { default: chalk } = __nccwpck_require__(5796);
 // }
 
 // TestMe.main();
+process.env.FORCE_COLOR = '1';
 
 async function Execute() {
     try {
