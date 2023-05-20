@@ -7,6 +7,12 @@ inputs:
   discloudToken: 
     description: 'Discloud API Token'
     required: true
+  gitUser: 
+    description: 'GitHub User'
+    required: true
+  gitToken: 
+    description: 'GitHub Token'
+    required: true
 outputs:
   appInfo:
     description: 'Info of the Discloud BOT'

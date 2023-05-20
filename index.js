@@ -26,13 +26,6 @@ async function Execute() {
         const discloudToken = core.getInput('discloudToken');
         const appId = core.getInput('appId');
 
-        process.cwd()
-        //const octokit = github.getOctokit(githubToken);
-
-        const context = github.context;
-        console.log(context);
-        console.log(github.token);
-
         core.startGroup('Get Bot Info via API');
         const data = await request.GetAppInfo(appId, discloudToken);
         if (data && data.status == "ok") {
@@ -43,14 +36,16 @@ async function Execute() {
             if (status)
                 logger.LogBotStatus(status);
 
-            logger.Info(`GITHUB_ENV: ${process.env.GITHUB_ENV}`);
-            logger.Info(`GITHUB_WORKSPACE: ${process.env.GITHUB_WORKSPACE}`);
-        } else
+            core.endGroup();
+        } else{
             core.setFailed("Bot not found!");
+            core.endGroup();
+            return;
+        }
+            
+       
 
-        core.endGroup();
-
-        await system.CompactRepo();
+        await system.CloneRepo();
 
 
         core.info(colors.bold.green(`## Process Finished! ##`));
