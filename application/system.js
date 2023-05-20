@@ -1,4 +1,5 @@
 const fs = require('fs');
+const core = require('@actions/core');
 const clone = require('git-clone/promise');
 const github = require('@actions/github');
 const logger = require('../utils/logger');

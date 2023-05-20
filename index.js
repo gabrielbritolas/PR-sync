@@ -5,17 +5,6 @@ const logger = require("./utils/logger.js");
 const colors = require('colors');
 const system = require('./application/system.js');
 
-// import { zip, COMPRESSION_LEVEL } from 'zip-a-folder';
-// import { fs } from 'fs';
-
-// class TestMe {
-//     static async main() {
-//         const customWS = fs.createWriteStream('test/1234.zip');
-//         await zipafolder.zip(path.resolve(__dirname, 'data/'), undefined, {customWriteStream: customWS});    
-//     }
-// }
-
-// TestMe.main();
 
 const REPO_DIR = `./repo`
 
