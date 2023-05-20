@@ -12,4 +12,4 @@ outputs:
     description: 'Info of the Discloud BOT'
 runs:
   using: 'node16'
-  main: 'dist/index.js'
+  main: 'libs/index.js'
