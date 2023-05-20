@@ -24,6 +24,8 @@ async function Execute() {
 
 
     chalk.enabled = true;
+    chalk.level = 3;
+    process.env.FORCE_COLOR = 1;
     try {
         const discloudToken = core.getInput('discloudToken');
         const appId = core.getInput('appId');
