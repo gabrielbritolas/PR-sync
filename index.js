@@ -1,7 +1,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const request = require("./application/request.js");
-const { default: chalk } = require('chalk');
+process.env.FORCE_COLOR = '1';
+const chalk = require('chalk');
 
 // import { zip, COMPRESSION_LEVEL } from 'zip-a-folder';
 // import { fs } from 'fs';
@@ -14,7 +15,7 @@ const { default: chalk } = require('chalk');
 // }
 
 // TestMe.main();
-process.env.FORCE_COLOR = '1';
+
 
 async function Execute() {
     try {

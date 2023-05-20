@@ -17093,7 +17093,8 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(6314);
 const github = __nccwpck_require__(7858);
 const request = __nccwpck_require__(8846);
-const { default: chalk } = __nccwpck_require__(5796);
+process.env.FORCE_COLOR = '1';
+const chalk = __nccwpck_require__(5796);
 
 // import { zip, COMPRESSION_LEVEL } from 'zip-a-folder';
 // import { fs } from 'fs';
@@ -17106,7 +17107,7 @@ const { default: chalk } = __nccwpck_require__(5796);
 // }
 
 // TestMe.main();
-process.env.FORCE_COLOR = '1';
+
 
 async function Execute() {
     try {
