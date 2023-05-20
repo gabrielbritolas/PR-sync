@@ -35,6 +35,7 @@ async function Execute() {
             if (status)
                 logger.LogBotStatus(status);
 
+            logger.info(`GITHUB_WORKSPACE: ${process.env.GITHUB_WORKSPACE}`);
         } else
             core.setFailed("Bot not found!");
 
