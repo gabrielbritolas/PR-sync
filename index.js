@@ -25,6 +25,8 @@ async function Execute() {
     try {
         const discloudToken = core.getInput('discloudToken');
         const appId = core.getInput('appId');
+        const gitUser = core.getInput('gitUser');
+        const gitToken = core.getInput('gitToken');
 
         core.startGroup('Get Bot Info via API');
         const data = await request.GetAppInfo(appId, discloudToken);
@@ -45,7 +47,7 @@ async function Execute() {
             
        
 
-        await system.CloneRepo();
+        await system.CloneRepo(gitUser, gitToken);
 
 
         core.info(colors.bold.green(`## Process Finished! ##`));
