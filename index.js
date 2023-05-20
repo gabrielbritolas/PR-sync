@@ -3,8 +3,6 @@ const github = require('@actions/github');
 const request = require("./application/request.js");
 const logger = require("./utils/logger.js");
 const colors = require('colors');
-const { default: chalk } = require('chalk');
-
 
 // import { zip, COMPRESSION_LEVEL } from 'zip-a-folder';
 // import { fs } from 'fs';
@@ -23,27 +21,26 @@ async function Execute() {
     colors.enable();
 
 
-    chalk.enabled = true;
-    chalk.level = 3;
-    process.env.FORCE_COLOR = 1;
     try {
         const discloudToken = core.getInput('discloudToken');
         const appId = core.getInput('appId');
 
-        logger.Info(chalk`{bold.magenta Chalk} aaaaa!`);
-
         core.startGroup('Get Bot Info via API');
         const data = await request.GetAppInfo(appId, discloudToken);
-        if (data) {
-            //core.notice(`Bot information ${colors.green(`Found`)}!`);
-            logger.Info(`Bot informations ${colors.bold.green(`Found`)}! ${colors.bold.white}`);
-            logger.Info(chalk`{bold.magenta Chalk}!`);
+        if (data && data.status == "ok") {
+            logger.LogBotInfo(data);
+            core.notice(`Bot name: ${data.apps.name}`);
+
+            const status = await request.GetAppStatus(appId, discloudToken);
+            if (status)
+                logger.LogBotStatus(status);
+
         } else
             core.setFailed("Bot not found!");
 
         core.endGroup();
 
-        core.info(`Fim!`);
+        core.info(colors.bold.green(`## Process Finished! ##`));
     } catch (error) {
         core.setFailed(error.message);
     }
