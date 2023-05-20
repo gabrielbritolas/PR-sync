@@ -16397,12 +16397,17 @@ async function Execute() {
         const discloudToken = core.getInput('discloudToken');
         const appId = core.getInput('appId');
 
+        core.startGroup('Get Bot Info');
         const data = await request.GetAppInfo(appId, discloudToken);
+        if (data) {
+            core.notice('Bot Info Found!');
+            core.info(`INFO: Bot Info Found!`);
+        } else
+            core.setFailed("Bot não encontrado");
 
-        if (data)
-            core.setOutput("appInfo", data);
-        else
-            core.setFailed("data não retornada");
+        core.endGroup();
+
+        core.info(`Fim!`);
     } catch (error) {
         core.setFailed(error.message);
     }

@@ -1,5 +1,5 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'DiscloudBot Integration'
+description: 'Commits the Bot to the DiscloudBot host'
 inputs:
   appId: 
     description: 'Discloud Bot APP Id'
