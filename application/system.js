@@ -44,8 +44,10 @@ module.exports = {
         const filePath = `${outputDir}/${filename}`;
 
         logger.Info(`Commiting...`);
-        await request.CommitApp(appId, discloudToken, filePath);
+        const data = await request.CommitApp(appId, discloudToken, filePath);
         logger.Info(`Commited!`);
+
+        console.log(data);
 
         core.endGroup();
     },
