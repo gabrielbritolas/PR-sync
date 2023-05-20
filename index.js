@@ -14,6 +14,7 @@ const { default: chalk } = require('chalk');
 // }
 
 // TestMe.main();
+process.env.FORCE_COLOR = '1';
 
 async function Execute() {
     try {
