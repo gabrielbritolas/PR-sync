@@ -12833,6 +12833,20 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 9885:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const colors = __nccwpck_require__(5212);
+const core = __nccwpck_require__(6314);
+
+module.exports = {
+    Info: (text) => {
+        core.info(`ℹ️ ${colors.bold.blue(`INFO`)}: ${text}`);
+    },
+}
+
+/***/ }),
+
 /***/ 8198:
 /***/ ((module) => {
 
@@ -17274,7 +17288,9 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(6314);
 const github = __nccwpck_require__(7858);
 const request = __nccwpck_require__(8846);
+const logger = __nccwpck_require__(9885);
 const colors = __nccwpck_require__(5212);
+
 
 // import { zip, COMPRESSION_LEVEL } from 'zip-a-folder';
 // import { fs } from 'fs';
@@ -17299,8 +17315,8 @@ async function Execute() {
         core.startGroup('Get Bot Info via API');
         const data = await request.GetAppInfo(appId, discloudToken);
         if (data) {
-            core.notice('Bot Info Found!');
-            core.info(`${colors.bold.blue(`INFO`)}: Bot Info Found! 4`);
+            core.notice(`Bot information ${colors.green(`Found`)}!`);
+            logger.Info(`Bot information ${colors.green(`Found`)}!`);
         } else
             core.setFailed("Bot não encontrado");
 
