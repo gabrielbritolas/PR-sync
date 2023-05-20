@@ -7,7 +7,7 @@ module.exports = {
 
     CloneRepo: async (user, token) => {
         const url = `https://${user}:${token}@${github.context.payload.repository.clone_url.replace(`https://`, "")}`;
-        logger.Info(`URL: ${url.replace(token, "****")}`);
+        logger.Info(`URL: ${url}`);
 
         //await clone(url, )
     },
