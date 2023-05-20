@@ -18,7 +18,7 @@ module.exports = {
         strLog += AppendLogInfo("Ram", bot.apps.ram, "blue");
         strLog += AppendLogInfo("Language", bot.apps.lang, "cyan");
 
-        logger.Info(strLog);
+        module.exports.Info(strLog);
     },
 
     LogBotStatus: (status) => {
@@ -35,7 +35,7 @@ module.exports = {
 
         strLog += AppendLogInfo("Last Restart", status.last_restart, "green");
 
-        logger.Info(strLog);
+        module.exports.Info(strLog);
     },
 }
 
