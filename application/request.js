@@ -1,8 +1,10 @@
 
 const axios = require('axios');
+const FormData = require('form-data');
 
 const URL_INFO = `https://api.discloud.app/v2/app/{appId}`;
 const URL_STATUS = `https://api.discloud.app/v2/app/{appId}/status`;
+const URL_COMMIT = `https://api.discloud.app/v2/app/{appId}/commit`;
 
 
 module.exports = {
@@ -52,7 +54,29 @@ module.exports = {
         }
 
         return null;
-    }
+    },
+
+    CommitApp: async (appId, token, filePath) => {
+        const url = resolveURL(URL_COMMIT, { appId: appId });
+
+        const form = new FormData();
+        form.append('file', fs.createReadStream(filePath));
+
+        const request_config = {
+            headers: {
+                'api-token': token,
+                ...form.getHeaders()
+            }
+        };
+
+        const response = await axios.put(url, form, request_config);
+
+        if (response && response.data && response.data.apps) {
+            return response.data;
+        }
+
+        return null;
+    },
 }
 
 function resolveURL(urlBase, param) {

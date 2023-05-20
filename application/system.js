@@ -29,18 +29,23 @@ module.exports = {
 
     CompactDirectory: async (dir, outputDir, filename) => {
         core.startGroup('Compacting Directory...');
-
         await io.mkdirP(outputDir);
-        const pathFile = `${outputDir}/${filename}`;
+        const filePath = `${outputDir}/${filename}`;
 
         logger.Info(`Compacting Directory...`);
-        await zip(dir, pathFile);
-        logger.Info(`Compacted to ${pathFile}`);
+        await zip(dir, filePath);
+        logger.Info(`Compacted to ${filePath}`);
+        core.endGroup();
+    },
 
-        fs.readdirSync(outputDir).forEach(file => {
-            console.log(file);
-        });
 
+    CommitDiscloud: async (appId, discloudToken, outputDir, filename) => {
+        core.startGroup('Commiting to Discloud...');
+        const filePath = `${outputDir}/${filename}`;
+
+        logger.Info(`Commiting...`);
+        await request.CommitApp(appId, discloudToken, filePath);
+        logger.Info(`Commited!`);
 
         core.endGroup();
     },

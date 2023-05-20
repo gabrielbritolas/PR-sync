@@ -24,6 +24,8 @@ async function Execute() {
         if (bot) {
             await system.CloneRepo(gitUser, gitToken, REPO_DIR);
             await system.CompactDirectory(REPO_DIR, OUTPUT_DIR, FILENAME);
+
+            await system.CommitDiscloud(appId, discloudToken, OUTPUT_DIR, FILENAME);
         }
 
         core.info(colors.bold.green(`## Process Finished! ##`));
