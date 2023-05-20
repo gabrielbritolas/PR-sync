@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const request = require("./application/request.js");
+const { default: chalk } = require('chalk');
 
 // import { zip, COMPRESSION_LEVEL } from 'zip-a-folder';
 // import { fs } from 'fs';
@@ -19,11 +20,11 @@ async function Execute() {
         const discloudToken = core.getInput('discloudToken');
         const appId = core.getInput('appId');
 
-        core.startGroup('Get Bot Info');
+        core.startGroup('Get Bot Info via API');
         const data = await request.GetAppInfo(appId, discloudToken);
         if (data) {
             core.notice('Bot Info Found!');
-            core.info(`INFO: Bot Info Found!`);
+            core.info(chalk`{bold.blue INFO}: Bot Info Found!`);
         } else
             core.setFailed("Bot não encontrado");
 
