@@ -30,6 +30,8 @@ async function Execute() {
         const discloudToken = core.getInput('discloudToken');
         const appId = core.getInput('appId');
 
+        logger.Info(chalk`{bold.magenta Chalk} aaaaa!`);
+
         core.startGroup('Get Bot Info via API');
         const data = await request.GetAppInfo(appId, discloudToken);
         if (data) {
