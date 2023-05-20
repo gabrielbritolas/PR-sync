@@ -1,6 +1,7 @@
 
 const axios = require('axios');
 const FormData = require('form-data');
+const fs = require('fs');
 
 const URL_INFO = `https://api.discloud.app/v2/app/{appId}`;
 const URL_STATUS = `https://api.discloud.app/v2/app/{appId}/status`;
