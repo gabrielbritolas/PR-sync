@@ -1,9 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const request = require("./application/request.js");
-process.env.FORCE_COLOR = '1';
-const { default: chalk } = require('chalk');
-
+const colors = require('colors');
 
 // import { zip, COMPRESSION_LEVEL } from 'zip-a-folder';
 // import { fs } from 'fs';
@@ -19,6 +17,8 @@ const { default: chalk } = require('chalk');
 
 
 async function Execute() {
+    colors.enable();
+
     try {
         const discloudToken = core.getInput('discloudToken');
         const appId = core.getInput('appId');
@@ -27,7 +27,7 @@ async function Execute() {
         const data = await request.GetAppInfo(appId, discloudToken);
         if (data) {
             core.notice('Bot Info Found!');
-            core.info(chalk`{bold.blue INFO}: Bot Info Found! 3`);
+            core.info(`${colors.bold.blue(`INFO`)}: Bot Info Found! 4`);
         } else
             core.setFailed("Bot não encontrado");
 
