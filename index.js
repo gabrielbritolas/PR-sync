@@ -25,16 +25,13 @@ async function Execute() {
     try {
         const discloudToken = core.getInput('discloudToken');
         const appId = core.getInput('appId');
-        const githubToken = core.getInput('githubToken');
-        const octokit = github.getOctokit(githubToken);
+
+        process.cwd()
+        //const octokit = github.getOctokit(githubToken);
 
         const context = github.context;
-
-        const newIssue = await octokit.rest.issues.create({
-            ...context.repo,
-            title: 'New issue!',
-            body: 'Hello Universe!'
-          });
+        console.log(context);
+        console.log(github.token);
 
         core.startGroup('Get Bot Info via API');
         const data = await request.GetAppInfo(appId, discloudToken);
