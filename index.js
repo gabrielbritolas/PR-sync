@@ -7,6 +7,8 @@ const system = require('./application/system.js');
 
 
 const REPO_DIR = `./repo`
+const OUTPUT_DIR = `./output`
+const FILENAME = `commit.zip`
 
 async function Execute() {
     colors.enable();
@@ -21,7 +23,7 @@ async function Execute() {
 
         if (bot) {
             await system.CloneRepo(gitUser, gitToken, REPO_DIR);
-            await system.CompactDirectory(REPO_DIR);
+            await system.CompactDirectory(REPO_DIR, OUTPUT_DIR, FILENAME);
         }
 
         core.info(colors.bold.green(`## Process Finished! ##`));

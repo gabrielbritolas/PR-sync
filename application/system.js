@@ -1,5 +1,6 @@
 const fs = require('fs');
 const core = require('@actions/core');
+const io = require('@actions/io');
 const clone = require('git-clone/promise');
 const github = require('@actions/github');
 const logger = require('../utils/logger');
@@ -26,16 +27,17 @@ module.exports = {
         core.endGroup();
     },
 
-    CompactDirectory: async (dir) => {
+    CompactDirectory: async (dir, outputDir, filename) => {
         core.startGroup('Compacting Directory...');
 
-        const pathFile = `./output/commit.zip`;
+        await io.mkdirP(outputDir);
+        const pathFile = `${outputDir}/${filename}`;
 
         logger.Info(`Compacting Directory...`);
         await zip(dir, pathFile);
         logger.Info(`Compacted to ${pathFile}`);
 
-        fs.readdirSync('./output').forEach(file => {
+        fs.readdirSync(outputDir).forEach(file => {
             console.log(file);
         });
 
