@@ -17094,7 +17094,8 @@ const core = __nccwpck_require__(6314);
 const github = __nccwpck_require__(7858);
 const request = __nccwpck_require__(8846);
 process.env.FORCE_COLOR = '1';
-const chalk = __nccwpck_require__(5796);
+const { default: chalk } = __nccwpck_require__(5796);
+
 
 // import { zip, COMPRESSION_LEVEL } from 'zip-a-folder';
 // import { fs } from 'fs';
