@@ -26,11 +26,14 @@ module.exports = {
 
         if (response && response.data) {
             console.log(response.data);
+            return response.data;
         }
         else {
             if (errResponse)
                 console.error(errResponse.data);
         }
+
+        return null;
     }
 }
 
@@ -16389,12 +16392,24 @@ const request = __nccwpck_require__(8846);
 
 // TestMe.main();
 
+async function Execute() {
+    try {
+        const discloudToken = core.getInput('discloudToken');
+        const appId = core.getInput('appId');
 
-try {
-    request.GetAppInfo("1684427241362", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMyMDI0ODA1MDQ1MjkyMjM2OCIsImtleSI6ImNmT29YcWJUMSJ9.U0oW_9NqAO3EmOvkujPP7a9a5MeqEjpdFBCT5_gjmkk");
-} catch (error) {
-    core.setFailed(error.message);
+        const data = await request.GetAppInfo(appId, discloudToken);
+
+        if (data)
+            core.setOutput("appInfo", data);
+        else
+            core.setFailed("data não retornada");
+    } catch (error) {
+        core.setFailed(error.message);
+    }
 }
+
+
+Execute();
 
 
 

@@ -20,11 +20,14 @@ module.exports = {
 
         if (response && response.data) {
             console.log(response.data);
+            return response.data;
         }
         else {
             if (errResponse)
                 console.error(errResponse.data);
         }
+
+        return null;
     }
 }
 
