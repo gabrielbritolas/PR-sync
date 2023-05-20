@@ -4,6 +4,8 @@ const clone = require('git-clone/promise');
 const github = require('@actions/github');
 const logger = require('../utils/logger');
 const request = require('./request');
+const { zip } = require('zip-a-folder');
+
 
 module.exports = {
 
