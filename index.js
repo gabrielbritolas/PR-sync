@@ -26,7 +26,7 @@ async function Execute() {
         const data = await request.GetAppInfo(appId, discloudToken);
         if (data) {
             core.notice('Bot Info Found!');
-            core.info(chalk`{bold.blue INFO}: Bot Info Found! a`.toString());
+            core.info(chalk`{bold.blue INFO}: Bot Info Found! 3`);
         } else
             core.setFailed("Bot não encontrado");
 
