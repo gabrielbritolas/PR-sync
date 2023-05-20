@@ -17,10 +17,10 @@ const system = require('./application/system.js');
 
 // TestMe.main();
 
+const REPO_DIR = `./repo`
 
 async function Execute() {
     colors.enable();
-
 
     try {
         const discloudToken = core.getInput('discloudToken');
@@ -28,27 +28,12 @@ async function Execute() {
         const gitUser = core.getInput('gitUser');
         const gitToken = core.getInput('gitToken');
 
-        core.startGroup('Get Bot Info via API');
-        const data = await request.GetAppInfo(appId, discloudToken);
-        if (data && data.status == "ok") {
-            logger.LogBotInfo(data);
-            core.notice(`Bot name: ${data.apps.name}`);
+        const bot = await system.GetDiscloudInfo(appId, discloudToken);
 
-            const status = await request.GetAppStatus(appId, discloudToken);
-            if (status)
-                logger.LogBotStatus(status);
-
-            core.endGroup();
-        } else{
-            core.setFailed("Bot not found!");
-            core.endGroup();
-            return;
+        if (bot) {
+            await system.CloneRepo(gitUser, gitToken, REPO_DIR);
+            await system.CompactDirectory(REPO_DIR);
         }
-            
-       
-
-        await system.CloneRepo(gitUser, gitToken);
-
 
         core.info(colors.bold.green(`## Process Finished! ##`));
     } catch (error) {
