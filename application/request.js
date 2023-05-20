@@ -72,9 +72,7 @@ module.exports = {
 
         const response = await axios.put(url, form, request_config);
 
-        console.log(response);
-
-        if (response && response.data && response.data.apps) {
+        if (response && response.data) {
             return response.data;
         }
 

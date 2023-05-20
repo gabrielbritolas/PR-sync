@@ -6,7 +6,7 @@ const github = require('@actions/github');
 const logger = require('../utils/logger');
 const request = require('./request');
 const { zip } = require('zip-a-folder');
-
+const colors = require('colors');
 
 module.exports = {
 
@@ -17,6 +17,7 @@ module.exports = {
 
         logger.Info(`Cloning the repo...`);
         await clone(url, dir);
+        core.notice(`Cloned Repo!`);
         logger.Info(`Cloned!`);
 
         logger.Info(`Files:`);
@@ -34,6 +35,7 @@ module.exports = {
 
         logger.Info(`Compacting Directory...`);
         await zip(dir, filePath);
+        core.notice(`Created ${filePath}`);
         logger.Info(`Compacted to ${filePath}`);
         core.endGroup();
     },
@@ -45,9 +47,14 @@ module.exports = {
 
         logger.Info(`Commiting...`);
         const data = await request.CommitApp(appId, discloudToken, filePath);
-        logger.Info(`Commited!`);
 
-        console.log(data);
+        if (data.status == "ok") {
+            core.notice(`Commited to Discloud!`);
+            logger.Info(colors.bold.magenta(`Commited to Discloud!`));
+        } else {
+            console.log(data);
+            core.setFailed(`Commited status not "ok"`);
+        }
 
         core.endGroup();
     },

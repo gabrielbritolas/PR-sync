@@ -26,6 +26,8 @@ async function Execute() {
             await system.CompactDirectory(REPO_DIR, OUTPUT_DIR, FILENAME);
 
             await system.CommitDiscloud(appId, discloudToken, OUTPUT_DIR, FILENAME);
+
+            await system.GetDiscloudInfo(appId, discloudToken);
         }
 
         core.info(colors.bold.green(`## Process Finished! ##`));
